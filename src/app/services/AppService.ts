@@ -12,14 +12,22 @@ export class AppService {
     const form = 'username=' + credentials.userName + '&' + 'password=' + credentials.password;
     this.http.post('/login', form, {
       headers: new HttpHeaders().set('content-type', 'application/x-www-form-urlencoded'),
-      responseType: 'text'
+      responseType: 'json'
     }).subscribe(res => {
       // console.log(res);
-      if (callback) {
+      if (!!callback) {
         callback(res);
       }
     }, err => {
       console.log(err);
+    });
+  }
+
+  users(callback) {
+    this.http.get('/api/user').subscribe(res => {
+      if (!!callback) {
+        callback(res);
+      }
     });
   }
 

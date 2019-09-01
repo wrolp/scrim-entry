@@ -35,3 +35,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ```
 npm i ng-zorro-antd --save
 ```
+
+## Useful Commands
+
+### Generate Component
+
+```
+ng generate component [name]
+```

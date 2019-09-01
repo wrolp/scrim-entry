@@ -3,13 +3,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {AppService} from '../../services/AppService';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
   height: string;
+
+  constructor(
+    private fb: FormBuilder,
+    private appService: AppService
+  ) {}
+
   paddingTop: string;
 
   submitForm(): void {
@@ -22,16 +28,16 @@ export class LoginComponent implements OnInit {
     if (!this.validateForm.value.userName || !this.validateForm.value.password) {
       return;
     }
-    this.authn.authn(this.validateForm.value, (response) => {
-      console.log('...');
-      console.log(response);
+    this.appService.authn(this.validateForm.value, res => {
+      if (res.success) {
+        this.appService.users(data => {
+          console.log(data);
+        });
+      } else {
+        console.log('failed authentication');
+      }
     });
   }
-
-  constructor(
-    private fb: FormBuilder,
-    private authn: AppService
-  ) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
