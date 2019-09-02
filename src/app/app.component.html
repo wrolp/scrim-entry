@@ -1,9 +1,10 @@
 <nz-layout>
   <nz-header>
     <ul nz-menu nzTheme="dark" nzMode="horizontal" [style.line-height]="'64px'">
-      <li nz-menu-item [routerLink]="['/home']">Home</li>
+      <li nz-menu-item [routerLink]="['/home']" class="ant-menu-item-selected" #home>Home</li>
       <li nz-menu-item [routerLink]="['/login']">Login</li>
       <li nz-menu-item [routerLink]="['/register']">Register</li>
+      <li nz-menu-item (click)="logout($event)">Logout</li>
     </ul>
   </nz-header>
   <nz-content>

@@ -6,7 +6,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class AppService {
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient
+  ) {}
 
   authn(credentials, callback) {
     const form = 'username=' + credentials.userName + '&' + 'password=' + credentials.password;
@@ -23,8 +25,18 @@ export class AppService {
     });
   }
 
+  logout(callback) {
+    this.http.get('/logout', {
+      responseType: 'json'
+    }).subscribe(res => {
+      if (!!callback) {
+        callback(res);
+      }
+    });
+  }
+
   users(callback) {
-    this.http.get('/api/user').subscribe(res => {
+    this.http.get('/api/users').subscribe(res => {
       if (!!callback) {
         callback(res);
       }
