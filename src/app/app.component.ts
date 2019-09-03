@@ -1,6 +1,6 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {AppService} from './services/AppService';
-import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,13 +15,13 @@ export class AppComponent {
 
   constructor(
     private appService: AppService,
-    private location: Location
+    private router: Router
   ) {}
 
   logout(event) {
     this.appService.logout(res => {
       if (res && res.success) {
-        this.location.go('/');
+        this.router.navigate(['/home']);
         event.target.className = 'ant-menu-item';
         this.home.nativeElement.className = 'ant-menu-item ant-menu-item-selected';
 

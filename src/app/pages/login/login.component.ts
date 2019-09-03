@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {AppService} from '../../services/AppService';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private appService: AppService
+    private appService: AppService,
+    private router: Router
   ) {}
 
   paddingTop: string;
@@ -30,9 +32,8 @@ export class LoginComponent implements OnInit {
     }
     this.appService.authn(this.validateForm.value, res => {
       if (res.success) {
-        this.appService.users(data => {
-          console.log(data);
-        });
+        this.router.navigate(['/users']);
+        // this.usersTab.nativeElement.className = 'ant-menu-item ant-menu-item-selected';
       } else {
         console.log('failed authentication');
       }
